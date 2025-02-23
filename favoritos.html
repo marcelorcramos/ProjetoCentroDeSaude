@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favoritos - Centro de Saúde Lumiar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="home.html">
+                <img src="imagens/logocs2-removebg-preview.png" width="140" alt="Centro de Saúde Lumiar">
+            </a>
+        </div>
+        <div class="titulo">
+            <h1>Centro de Saúde Lumiar</h1>
+            <p>Cuide-se para poder cuidar</p>
+        </div>
+    </header>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="sobre.html">Sobre Nós</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="consultas.html">Consultas</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="FAQ.html">FAQ</a>
+        <a href="politicas.html">Políticas de Privacidade</a>
+        <a href="termosdeuso.html">Termos de Uso</a>
+        <div class="favCartProfile">
+            <a href="carrinho.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="favoritos.html"><i class="fa-solid fa-heart"></i></a>
+            <a href="login.html"><i class="fa-solid fa-user"></i></a>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Favoritos</h2>
+        <div class="favoritos-container"></div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Centro de Saúde Lumiar. Todos os direitos reservados.</p>
+        <p>Feito por: Marcelo Ramos & João Piedade</p>
+    </footer>
+    <script>
+        function carregarFavoritos() {
+        const container = document.querySelector('.favoritos-container');
+        container.innerHTML = ''; // Limpar antes de carregar
+
+        const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+
+        if (favoritos.length === 0) {
+            container.innerHTML = '<p>Nenhum item nos favoritos.</p>';
+            return;
+        }
+
+        favoritos.forEach(produto => {
+            const div = document.createElement('div');
+            div.classList.add('favorito-item');
+            div.innerHTML = `
+                <img src="${produto.imagem}" alt="${produto.nome}">
+                <h3>${produto.nome}</h3>
+                <p>${produto.preco}</p>
+                <button class="btn-remover">Remover</button>
+            `;
+            container.appendChild(div);
+        });
+
+        // Adicionar eventos de remoção
+        document.querySelectorAll('.btn-remover').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const nomeProduto = event.target.previousElementSibling.previousElementSibling.innerText;
+                removerFavorito(nomeProduto);
+            });
+        });
+    }
+
+        function removerFavorito(nome) {
+            let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+            favoritos = favoritos.filter(produto => produto.nome !== nome);
+            localStorage.setItem('favoritos', JSON.stringify(favoritos));
+            carregarFavoritos();
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarFavoritos);
+    </script>
+</body>
+</html>

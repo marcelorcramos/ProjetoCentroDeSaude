@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Saúde Lumiar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="home.html">
+                <img src="imagens/logocs2-removebg-preview.png" width="140" alt="Centro de Saúde Lumiar">
+            </a>
+        </div>
+        <div class="titulo">
+            <h1>Centro de Saúde Lumiar</h1>
+            <p>Cuide-se para poder cuidar</p>
+        </div>
+    </header>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="sobre.html">Sobre Nós</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="consultas.html">Consultas</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="FAQ.html">FAQ</a>
+        <a href="politicas.html">Políticas de Privacidade</a>
+        <a href="termosdeuso.html">Termos de Uso</a>
+        <div class="favCartProfile">
+            <a href="carrinho.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="favoritos.html"><i class="fa-solid fa-heart"></i></a>
+            <a href="login.html"><i class="fa-solid fa-user"></i></a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="container-login">
+            <div class="login" id="loginForm">
+                <h2>Iniciar Sessão</h2>
+                <hr>
+                <input type="text" id="loginUser" placeholder="Digite seu email">
+                <input type="password" id="loginPass" placeholder="Digite sua palavra-passe">
+                <button onclick="login()">INICIAR SESSÃO</button>
+            </div>
+            <div class="cadastro" id="cadastroDiv">
+                <p class="register">Ainda não tens uma conta? <a href="cadastro.html">Cadastro</a></p>
+            </div>
+            <div class="user" id="userInfo" style="margin-top: -300px;"></div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Centro de Saúde Lumiar. Todos os direitos reservados.</p>
+        <p>Feito por: Marcelo Ramos & João Piedade</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let isLoggedIn = localStorage.getItem("loggedIn");
+            let userEmail = localStorage.getItem("loggedUser");
+            let userName = localStorage.getItem("name");
+            let userNumber = localStorage.getItem("number");
+            let userInfo = document.getElementById("userInfo");
+            let loginForm = document.getElementById("loginForm");
+            let cadastroDiv = document.getElementById("cadastroDiv");
+
+                        if (isLoggedIn) {
+                userInfo.innerHTML = `
+                    <div class="user-info" style="margin-top: -100px; text-align: left;">
+                        <p>Nome: ${userName}</p>
+                        <p>Número de Utente: ${userNumber}</p>
+                        <p>Email: ${userEmail}</p>
+                        <button onclick="logout()">Logout</button>
+                    </div>
+                `;
+                loginForm.style.display = "none"; 
+                if (cadastroDiv) cadastroDiv.style.display = "none";
+            }
+        });
+
+        function login() {
+            let user = document.getElementById("loginUser").value;
+            let pass = document.getElementById("loginPass").value;
+            let storedUser = localStorage.getItem("user");
+            let storedPass = localStorage.getItem("pass");
+            let isRegistered = localStorage.getItem("registered");
+
+            if (!isRegistered) {
+                alert("Você precisa se cadastrar antes de fazer login!");
+                window.location.href = "cadastro.html";
+                return;
+            }
+
+            if (user === storedUser && pass === storedPass) {
+                alert("Login bem-sucedido!");
+                localStorage.setItem("loggedIn", "true");
+                localStorage.setItem("loggedUser", user);
+                window.location.href = "home.html";
+            } else {
+                alert("Usuário ou senha incorretos!");
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("loggedUser");
+            localStorage.removeItem("name");
+            localStorage.removeItem("number");
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>

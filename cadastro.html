@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Saúde Lumiar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="home.html">
+                <img src="imagens/logocs2-removebg-preview.png" width="140" alt="Centro de Saúde Lumiar">
+            </a>
+        </div>
+        <div class="titulo">
+            <h1>Centro de Saúde Lumiar</h1>
+            <p>Cuide-se para poder cuidar</p>
+        </div>
+    </header>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="sobre.html">Sobre Nós</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="consultas.html">Consultas</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="FAQ.html">FAQ</a>
+        <a href="politicas.html">Políticas de Privacidade</a>
+        <a href="termosdeuso.html">Termos de Uso</a>
+        <div class="favCartProfile">
+            <a href="carrinho.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="favoritos.html"><i class="fa-solid fa-heart"></i></a>
+            <a href="login.html"><i class="fa-solid fa-user"></i></a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="container-login">
+            <div class="login">
+                <h2>Cadastro</h2>
+                <hr style="height: 1px; border: none; background-color: #ccc; margin-top: -2px;" >
+                <input type="text" id="registerName" placeholder="Nome">
+                <input type="number" id="registerNumber" placeholder="Número de Utente">
+                <input type="text" id="registerUser" placeholder="Email">
+                <input type="password" id="registerPass" placeholder="Palavra-Passe">
+                <button onclick="register()">Cadastrar</button>
+            </div>
+                <div class="cadastro">
+                    <p class="register">Já tens uma conta? <a href="login.html">Login</a></p>
+                </div>
+            </div>
+        </div>
+    <footer>
+        <p>&copy; 2025 Centro de Saúde Lumiar. Todos os direitos reservados.</p>
+        <p>Feito por: Marcelo Ramos & João Piedade</p>
+    </footer>
+    <script>
+        function register() {
+            let user = document.getElementById("registerUser").value;
+            let pass = document.getElementById("registerPass").value;
+            let number = document.getElementById("registerNumber").value;
+            let name = document.getElementById("registerName").value;
+
+            // Verifica se todos os campos estão preenchidos
+            if (!user || !pass || !name || !number) {
+                alert("Preencha todos os campos!");
+                return;
+            }
+
+            // Verifica se o número tem exatamente 9 dígitos numéricos
+            if (!/^\d{9}$/.test(number)) {
+                alert("O número de registro deve conter exatamente 9 dígitos!");
+                return;
+            }
+
+            // Salva os dados no localStorage
+            localStorage.setItem("user", user);
+            localStorage.setItem("pass", pass);
+            localStorage.setItem("name", name);
+            localStorage.setItem("number", number);
+            localStorage.setItem("registered", "true");
+
+            alert("Cadastro realizado com sucesso! Agora você pode fazer login.");
+            window.location.href = "login.html";
+        }
+
+        // Verifica se os campos de login estão preenchidos antes de ativar o botão
+        const inputs = document.querySelectorAll("#loginUser, #loginPass");
+        const loginBtn = document.getElementById("loginBtn");
+
+        inputs.forEach(input => {
+            input.addEventListener("input", () => {
+                const allFilled = [...inputs].every(input => input.value.trim() !== "");
+                loginBtn.disabled = !allFilled;
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+/* Header Responsivo */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f8f8f8;
+    color: black;
+    padding: 15px 20px;
+    flex-wrap: wrap;
+}
+
+header .logo img {
+    width: 120px;
+    height: auto;
+}
+
+.titulo {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.titulo h1 {
+    font-size: 3rem;
+    margin: 0;
+    line-height: 1.2;
+    color: #002850;
+    padding-right: 140px;
+}
+
+/* Navbar Responsiva */
+nav {
+    background: #002850;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+    color: red;
+}
+
+/* Conteúdo Principal */
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    background-color: #f8f8f8;
+}
+
+/* Rodapé */
+footer {
+    background: #004080;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+/* Estilização da seção de serviços */
+.servico {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    text-align: left;
+    color: grey;
+}
+
+.servico ul {
+    list-style-type: disc; 
+    padding-left: 20px;
+}
+
+.servico ul ul {
+    list-style-type: circle;
+    padding-left: 20px;
+}
+
+.servico li {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.servico h2 {
+    color: black;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+
+/* Estilos para os banners de consultas */
+.banner-consultas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.Marcacoes {
+    background: white;
+    padding: 15px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 350px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .titulo h1 {
+        font-size: 2rem;
+        padding-right: 0;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    nav a {
+        display: block;
+        padding: 10px;
+    }
+
+    .banner-consultas {
+        width: 100%;
+    }
+
+    .Marcacoes {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .titulo h1 {
+        font-size: 1.8rem;
+    }
+
+    .Marcacoes {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    nav a {
+        font-size: 0.8rem;
+    }
+}
+
+.btn-servico {
+    background-color: #004080;
+    color: white !important;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+    text-decoration: none; 
+    display: inline-block;
+    text-align: center;
+}
+.btn-servico:hover {
+    background-color: red;
+}
+
+.favCartProfile {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 20px;
+    font-size: 1.5rem;
+}
+
+.favCartProfile i {
+    cursor: pointer;
+    color: #002850;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.favCartProfile i:hover {
+    transform: scale(1.2);
+}

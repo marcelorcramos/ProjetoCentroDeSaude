@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Saúde Lumiar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="home.html">
+                <img src="imagens/logocs2-removebg-preview.png" width="140" alt="Centro de Saúde Lumiar">
+            </a>
+        </div>
+        <div class="titulo">
+            <h1>Centro de Saúde Lumiar</h1>
+            <p>Cuide-se para poder cuidar</p>
+        </div>
+    </header>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="sobre.html">Sobre Nós</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="consultas.html">Consultas</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="FAQ.html">FAQ</a>
+        <a href="politicas.html">Políticas de Privacidade</a>
+        <a href="termosdeuso.html">Termos de Uso</a>
+        <div class="favCartProfile">
+            <a href="carrinho.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="favoritos.html"><i class="fa-solid fa-heart"></i></a>
+            <a href="login.html"><i class="fa-solid fa-user"></i></a>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Bem-vindo ao website da USF Lumiar</h2>
+        <p>Aqui encontrará informações úteis sobre o funcionamento da unidade de saúde familiar. Conheça a nossa <a href="sobre.html">equipa</a> 
+            de profissionais, bem como os seus horários de trabalho. Poderá agendar as suas consultas ou fazer um pedido 
+            para renovação de receituário crónico. Também pode usar esta plataforma para esclarecer dúvidas e dar as suas sugestões.</p>
+            <section class="nossa-consulta">
+                <h2>Produtos em Promoção!</h2>
+                <div class="consulta-lista">
+                    <div class="consulta-item">
+                        <div class="desconto">-30%</div>
+                        <h3>Cadeira de Rodas</h3>
+                        <img src="imagens/cadeiraderodas.jpg" alt="Cadeira de Rodas" width="167px">
+                        <p class="preco-antigo">185,00 €</p>
+                        <div class="actions">
+                            <button class="btn-servico" onclick="adicionarAoCarrinho(this)">130,00 €</button>
+                            <i class="fa-regular fa-heart" onclick="adicionarFavorito(this)"></i>
+                        </div>
+                    </div>
+                    <div class="consulta-item">
+                        <div class="desconto">-10%</div>
+                        <h3>Vick Vaporub</h3>
+                        <img src="imagens/vick.webp" alt="Cadeira de Rodas" width="150px">
+                        <p class="preco-antigo">5,99 €</p>
+                        <div class="actions">
+                            <button class="btn-servico" onclick="adicionarAoCarrinho(this)">5,40 €</button>
+                            <i class="fa-regular fa-heart" onclick="adicionarFavorito(this)"></i>
+                        </div>
+                    </div>
+                    <div class="consulta-item">
+                        <div class="desconto">-23%</div>
+                        <h3>Tensiómetro</h3>
+                        <img src="imagens/tensiometro.png" alt="Cadeira de Rodas" width="250px">
+                        <p class="preco-antigo">65,00 €</p>
+                        <div class="actions">  
+                            <button class="btn-servico" onclick="adicionarAoCarrinho(this)">51,00 €</button>
+                            <i class="fa-regular fa-heart" onclick="adicionarFavorito(this)"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>  
+        <hr>
+        <div class="funcionamento">
+            <h2>Horário de Funcionamento</h2>
+            <p>Das <span class="horario-destaque">8:00 às 20:00</span> horas, nos dias úteis, garantindo a acessibilidade e continuidade de cuidados a todos os utentes inscritos.
+                Clique <a href="sobre.html">aqui</a> para consultar os horários por micro equipas ou ver as alternativas ao atendimento fora do horário de funcionamento da USF.
+            </p> 
+        </div>
+        <hr>
+        <div class="banner-servicos">
+            <div class="servico">
+                <h3>Serviços Mínimos</h3>
+                <p>Solicite já de acordo com sua necessidade.</p>
+                <a href="servicos.html" class="btn-servico">Agendar</a>
+            </div>
+            <div class="servico">
+                <h3>Consultas</h3>
+                <p>Marque sua consulta o quanto antes.</p>
+                <a href="consultas.html" class="btn-servico">Agendar</a>
+            </div>
+            <div class="servico">
+                <h3>Exames</h3>
+                <p>Encontre informações sobre seus exames.</p>
+                <a href="exames.html" class="btn-servico">Agendar</a>
+            </div>
+        </div>
+        <hr>
+        <div class="Contactos">
+            <h2>Contactos</h2>
+            <section class="Informação">
+                <div class="Morada">
+                    <h3>Morada</h3>
+                    <p>Alameda das Linhas de Torres 179, 1750-142 Lisboa</p>
+                </div>
+                <div class="Contacto">
+                    <h3>Telefone:</h3><p>(+351) 934271270</p>
+                    <h3>E-mail:</h3><p>usf.lumiarportugal@usfminsaude.pt</p>
+                </div>
+            </section>
+        </div>        
+    </div>
+    <footer>
+        <p>&copy; 2025 Centro de Saúde Lumiar. Todos os direitos reservados.</p>
+        <p>Feito por: Marcelo Ramos & João Piedade</p>
+    </footer>
+    <script>
+        function adicionarFavorito(elemento) {
+            const produtoItem = elemento.closest('.consulta-item');
+            const nome = produtoItem.querySelector('h3').innerText;
+            const imagem = produtoItem.querySelector('img').src;
+            const preco = produtoItem.querySelector('.btn-servico').innerText;
+
+            let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+
+            const index = favoritos.findIndex(item => item.nome === nome);
+
+            if (index === -1) {
+                // Adicionar aos favoritos
+                favoritos.push({ nome, imagem, preco });
+                elemento.classList.remove('fa-regular');
+                elemento.classList.add('fa-solid');
+            } else {
+                // Remover dos favoritos
+                favoritos.splice(index, 1);
+                elemento.classList.remove('fa-solid');
+                elemento.classList.add('fa-regular');
+            }
+            
+            mostrarPopup("Adicionado aos favoritos!");
+            localStorage.setItem('favoritos', JSON.stringify(favoritos));
+        }
+
+
+        function adicionarAoCarrinho(elemento) {
+            const produtoItem = elemento.closest('.consulta-item');
+            if (!produtoItem) {
+                console.error("Elemento do produto não encontrado!");
+                return;
+            }
+
+            const nome = produtoItem.querySelector('h3').innerText;
+            const imagem = produtoItem.querySelector('img').src;
+            const preco = elemento.innerText;
+
+            if (!nome || !imagem || !preco) {
+                console.error("Dados do produto estão incompletos!");
+                return;
+            }
+
+            const produto = { nome, imagem, preco };
+
+            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            carrinho.push(produto);
+            localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+            console.log("Produto adicionado:", produto);
+            console.log("Carrinho atualizado:", carrinho);
+            
+            mostrarPopup("Produto adicionado ao carrinho!");
+        }
+
+        function mostrarPopup(mensagem) {
+            let popup = document.createElement("div");
+            popup.className = "popup-alert";
+            popup.innerText = mensagem;
+            document.body.appendChild(popup);
+
+            setTimeout(() => {
+                popup.classList.add("mostrar");
+            }, 100);
+
+            setTimeout(() => {
+                popup.classList.remove("mostrar");
+                setTimeout(() => popup.remove(), 500);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

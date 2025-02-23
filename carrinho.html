@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Centro de Saúde Lumiar</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="home.html">
+                <img src="imagens/logocs2-removebg-preview.png" width="140" alt="Centro de Saúde Lumiar">
+            </a>
+        </div>
+        <div class="titulo">
+            <h1>Centro de Saúde Lumiar</h1>
+            <p>Cuide-se para poder cuidar</p>
+        </div>
+    </header>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="sobre.html">Sobre Nós</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="consultas.html">Consultas</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="FAQ.html">FAQ</a>
+        <a href="politicas.html">Políticas de Privacidade</a>
+        <a href="termosdeuso.html">Termos de Uso</a>
+        <div class="favCartProfile">
+            <a href="carrinho.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="favoritos.html"><i class="fa-solid fa-heart"></i></a>
+            <a href="login.html"><i class="fa-solid fa-user"></i></a>
+        </div>
+    </nav>
+    <div class="cart-container">
+        <div class="cart-left">
+            <h2>O meu carrinho <span>1 artigos</span></h2>
+        </div>
+        <div class="cart-right">
+            <div class="cart-summary">
+                <div class="summary-item">
+                    <span>Subtotal</span>
+                    <span>€0,00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Custos de envio estimados</span>
+                    <span>€0,00</span>
+                </div>
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span>€0,00</span>
+                </div>
+            </div>
+
+            <div class="user-info-form">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="address-form">
+                <label for="street">Rua:</label>
+                <input type="text" id="street" name="street" required>
+
+                <label for="city">Cidade:</label>
+                <input type="text" id="city" name="city" required>
+
+                <label for="country">País:</label>
+                <input type="text" id="country" name="country" required>
+
+                <label for="postal-code">Código Postal:</label>
+                <input type="text" id="postal-code" name="postal-code" required>
+            </div>
+
+            <button class="cart-button" onclick="efetuarCompra()">COMPRAR</button>
+
+            <div class="payment-methods">
+                <img src="imagens/visa_logo.png" alt="VISA">
+                <img src="imagens/multibanco_logo.png" alt="Multibanco">
+                <img src="imagens/mbway_logo.png" alt="MBWay">
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Centro de Saúde Lumiar. Todos os direitos reservados.</p>
+        <p>Feito por: Marcelo Ramos & João Piedade</p>
+    </footer> 
+
+    <!-- Popup -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p id="popup-message"></p>
+            <button onclick="fecharPopup()">Fechar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            let container = document.querySelector(".cart-left");
+            let resumoTotal = document.querySelector(".summary-total span:last-child");
+            let botaoComprar = document.querySelector(".cart-button");
+
+            if (carrinho.length === 0) {
+                container.innerHTML = ` 
+                    <h2>O meu carrinho <span>0 artigos</span></h2>
+                    <div class="cart-empty">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <p>Carrinho vazio</p>
+                    </div>`;
+                resumoTotal.innerText = "€0,00";
+
+                botaoComprar.disabled = true;
+                botaoComprar.style.opacity = "0.5";
+                botaoComprar.style.cursor = "not-allowed";
+            } else {
+                let listaHTML = `<h2>O meu carrinho <span>${carrinho.length} artigos</span></h2><ul>`;
+                let total = 0;
+
+                carrinho.forEach((produto, index) => {
+                    total += parseFloat(produto.preco.replace("€", "").replace(",", "."));
+                    listaHTML += ` 
+                        <li class="cart-item">
+                            <img src="${produto.imagem}" width="80">
+                            <span>${produto.nome}</span>
+                            <span>${produto.preco}</span>
+                            <button onclick="removerDoCarrinho(${index})">Remover</button>
+                        </li>`;
+                });
+
+                listaHTML += `</ul>`;
+                container.innerHTML = listaHTML;
+
+                resumoTotal.innerText = `€${total.toFixed(2)}`;
+                botaoComprar.disabled = false;
+                botaoComprar.style.opacity = "1";
+                botaoComprar.style.cursor = "pointer";
+            }
+
+            let isLoggedIn = localStorage.getItem("loggedIn");
+            if (isLoggedIn) {
+                let userName = localStorage.getItem("name");
+                let userEmail = localStorage.getItem("loggedUser");
+
+                document.getElementById("name").value = userName || "";
+                document.getElementById("email").value = userEmail || "";
+            }
+        });
+
+        function removerDoCarrinho(index) {
+            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            carrinho.splice(index, 1); 
+            localStorage.setItem("carrinho", JSON.stringify(carrinho));
+            location.reload(); 
+        }
+
+        function efetuarCompra() {
+            let nome = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let rua = document.getElementById("street").value;
+            let cidade = document.getElementById("city").value;
+            let pais = document.getElementById("country").value;
+            let codigoPostal = document.getElementById("postal-code").value;
+
+            if (nome === "" || email === "" || rua === "" || cidade === "" || pais === "" || codigoPostal === "") {
+                alert("Por favor, preencha todos os campos.");
+            } else {
+                mostrarPopup("Compra bem-sucedida!");
+
+                setTimeout(() => {
+                    let morada = rua + ", " + cidade + ", " + pais + ", " + codigoPostal;
+                    let popupMessage = `A sua encomenda será entregue em 4 dias úteis em: ${morada}`;
+                    mostrarPopup(popupMessage);
+                }, 2000); 
+            }
+        }
+
+        function mostrarPopup(mensagem) {
+            let popup = document.getElementById("popup");
+            let popupMessage = document.getElementById("popup-message");
+            popupMessage.innerText = mensagem;
+            popup.style.display = "flex";
+        }
+
+        function fecharPopup() {
+            let popup = document.getElementById("popup");
+            popup.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
