@@ -16,6 +16,7 @@
         </div>
         <div class="titulo">
             <h1>Produtos</h1>
+        </div>
     </header>
     <nav>
         <a href="home.html">Home</a>
@@ -35,146 +36,89 @@
     </nav>
     <div class="container">
         <section class="nossa-consulta">
-            <h2>Produtos Disponívieis</h2>
-            <div class="consulta-lista">
-                <div class="consulta-item">
-                    <div class="desconto">-30%</div>
-                    <h3>Cadeira de Rodas</h3>
-                    <img src="imagens/cadeiraderodas.jpg" alt="Cadeira de Rodas" width="167px">
-                    <p class="preco-antigo">185,00 €</p>
-                    <div class="actions">
-                        <button class="btn-servico" onclick="adicionarAoCarrinho(this)">130,00 €</button>
-                        <i class="fa-regular fa-heart" onclick="adicionarFavorito(this)"></i>
-                    </div>
-                </div>
-                <div class="consulta-item">
-                    <h3>Ataduras</h3>
-                    <img src="imagens/bandagem2.webp" alt="Bandagem" width="210px">
-                    <div class="actions">
-                        <button class="btn-servico" onclick="adicionarAoCarrinho(this)">4,99 €</button>
-                        <i class="fa-regular fa-heart" onclick="adicionarFavorito(this)"></i>
-                    </div>
-                </div>
-                <div class="consulta-item">
-                    <h3>Fita de Articulação</h3>
-                    <img src="imagens/cotovelo.webp" alt="Fita de Articulação" width="210px">
-                    <div class="actions">
-                        <button class="btn-servico" onclick="adicionarAoCarrinho(this)">23,99 €</button>
-                        <i class="fa-regular fa-heart" onclick="adicionarFavorito(this)"></i>
-                    </div>
-                </div>
-                <div class="consulta-item">
-                    <h3>Muletas de Apoio</h3>
-                    <img src="imagens/muletas.jpg" alt="Muletas" width="150px">
-                    <div class="actions">
-                        <button class="btn-servico" onclick="adicionarAoCarrinho(this)">40,99 €</button>
-                        <i class="fa-regular fa-heart" onclick="adicionarFavorito(this)"></i>
-                    </div>
-                </div>
-                <div class="consulta-item">
-                    <h3>Pomada</h3>
-                    <img src="imagens/pomada.webp" alt="Pomada" width="150px">
-                    <div class="actions">
-                        <button class="btn-servico" onclick="adicionarAoCarrinho(this)"> 13,99 €</button>
-                        <i class="fa-regular fa-heart" onclick="adicionarFavorito(this)"></i>
-                    </div>
-                </div>
-                <div class="consulta-item">
-                    <h3>Xarope</h3>
-                    <img src="imagens/xapore.jpg" alt="xarope" width="150px">
-                    <div class="actions">
-                        <button class="btn-servico" onclick="adicionarAoCarrinho(this)">8,99 €</button>
-                        <i class="fa-regular fa-heart" onclick="adicionarFavorito(this)"></i>
-                    </div>
-                </div>
-                <div class="consulta-item">
-                    <div class="desconto">-10%</div>
-                    <h3>Vick Vaporub</h3>
-                    <img src="imagens/vick.webp" alt="Cadeira de Rodas" width="150px">
-                    <p class="preco-antigo">5,99 €</p>
-                    <div class="actions">
-                        <button class="btn-servico" onclick="adicionarAoCarrinho(this)">5,40 €</button>
-                        <i class="fa-regular fa-heart" onclick="adicionarFavorito(this)"></i>
-                    </div>
-                </div>
-                <div class="consulta-item">
-                    <div class="desconto">-23%</div>
-                    <h3>Tensiómetro</h3>
-                    <img src="imagens/tensiometro.png" alt="Cadeira de Rodas" width="250px">
-                    <p class="preco-antigo">65,00 €</p>
-                    <div class="actions">  
-                        <button class="btn-servico" onclick="adicionarAoCarrinho(this)">51,00 €</button>
-                        <i class="fa-regular fa-heart" onclick="adicionarFavorito(this)"></i>
-                    </div>
-                </div>
-                <div class="consulta-item">
-                    <h3>Termômetro</h3>
-                    <img src="imagens/termometro.png" alt="xarope" width="207px">
-                    <div class="actions">
-                        <button class="btn-servico" onclick="adicionarAoCarrinho(this)">9,99 €</button>
-                        <i class="fa-regular fa-heart" onclick="adicionarFavorito(this)"></i>
-                    </div>
-                </div>
+            <h2>Produtos Disponíveis</h2>
+            <label for="sort">Ordenar por:</label>
+            <select id="sort" onchange="ordenarProdutos()">
+                <option value="padrao">Padrão</option>
+                <option value="menorPreco">Menor Preço</option>
+                <option value="maiorPreco">Maior Preço</option>
+            </select>
+            <div class="consulta-lista" id="produtos-container">
             </div>
-        </section>        
+        </section>
     </div>
     <footer>
         <p>&copy; 2025 Centro de Saúde Lumiar. Todos os direitos reservados.</p>
         <p>Feito por: Marcelo Ramos & João Piedade</p>
     </footer>
     <script>
+        const produtos = [
+            { nome: "Cadeira de Rodas", imagem: "imagens/cadeiraderodas.jpg", precoAntigo: 185.00, preco: 130.00, desconto: "-30%"},
+            { nome: "Ataduras", imagem: "imagens/bandagem2.webp", preco: 4.99 },
+            { nome: "Fita de Articulação", imagem: "imagens/cotovelo.webp", preco: 23.99 },
+            { nome: "Muletas de Apoio", imagem: "imagens/muletas.jpg", preco: 40.99 },
+            { nome: "Pomada", imagem: "imagens/pomada.webp", preco: 13.99 },
+            { nome: "Xarope", imagem: "imagens/xapore.jpg", preco: 8.99 },
+            { nome: "Vick Vaporub", imagem: "imagens/vick.webp", precoAntigo: 5.99, preco: 5.40, desconto: "-10%" },
+            { nome: "Tensiómetro", imagem: "imagens/tensiometro.png", precoAntigo: 65.00, preco: 51.00, desconto: "-23%" },
+            { nome: "Termômetro", imagem: "imagens/termometro.png", preco: 9.99 }
+        ];
+
+        function carregarProdutos(lista) {
+            const container = document.getElementById("produtos-container");
+            container.innerHTML = "";
+            lista.forEach(produto => {
+                let item = `<div class='consulta-item'>
+                    ${produto.desconto ? `<div class='desconto'>${produto.desconto}</div>` : ""}
+                    <h3>${produto.nome}</h3>
+                    <img src='${produto.imagem}' alt='${produto.nome}' width='150px'>
+                    ${produto.precoAntigo ? `<p class='preco-antigo'>${produto.precoAntigo.toFixed(2)} €</p>` : ""}
+                    <div class='actions'>
+                        <button class='btn-servico' onclick='adicionarAoCarrinho(this)'>${produto.preco.toFixed(2)} €</button>
+                        <i class='fa-regular fa-heart' onclick='adicionarFavorito(this)'></i>
+                    </div>
+                </div>`;
+                container.innerHTML += item;
+            });
+        }
+
+        function ordenarProdutos() {
+            let criterio = document.getElementById("sort").value;
+            let listaOrdenada = [...produtos];
+            if (criterio === "menorPreco") {
+                listaOrdenada.sort((a, b) => a.preco - b.preco);
+            } else if (criterio === "maiorPreco") {
+                listaOrdenada.sort((a, b) => b.preco - a.preco);
+            }
+            carregarProdutos(listaOrdenada);
+        }
+
         function adicionarFavorito(elemento) {
             const produtoItem = elemento.closest('.consulta-item');
             const nome = produtoItem.querySelector('h3').innerText;
             const imagem = produtoItem.querySelector('img').src;
             const preco = produtoItem.querySelector('.btn-servico').innerText;
-
             let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-
             const index = favoritos.findIndex(item => item.nome === nome);
-
             if (index === -1) {
-                // Adicionar aos favoritos
                 favoritos.push({ nome, imagem, preco });
-                elemento.classList.remove('fa-regular');
                 elemento.classList.add('fa-solid');
             } else {
-                // Remover dos favoritos
                 favoritos.splice(index, 1);
                 elemento.classList.remove('fa-solid');
-                elemento.classList.add('fa-regular');
             }
-            
-            mostrarPopup("Adicionado aos favoritos!");
             localStorage.setItem('favoritos', JSON.stringify(favoritos));
+            mostrarPopup("Adicionado aos favoritos!");
         }
-
 
         function adicionarAoCarrinho(elemento) {
             const produtoItem = elemento.closest('.consulta-item');
-            if (!produtoItem) {
-                console.error("Elemento do produto não encontrado!");
-                return;
-            }
-
             const nome = produtoItem.querySelector('h3').innerText;
             const imagem = produtoItem.querySelector('img').src;
             const preco = elemento.innerText;
-
-            if (!nome || !imagem || !preco) {
-                console.error("Dados do produto estão incompletos!");
-                return;
-            }
-
-            const produto = { nome, imagem, preco };
-
             let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-            carrinho.push(produto);
+            carrinho.push({ nome, imagem, preco });
             localStorage.setItem("carrinho", JSON.stringify(carrinho));
-
-            console.log("Produto adicionado:", produto);
-            console.log("Carrinho atualizado:", carrinho);
-            
             mostrarPopup("Produto adicionado ao carrinho!");
         }
 
@@ -183,16 +127,11 @@
             popup.className = "popup-alert";
             popup.innerText = mensagem;
             document.body.appendChild(popup);
-
-            setTimeout(() => {
-                popup.classList.add("mostrar");
-            }, 100);
-
-            setTimeout(() => {
-                popup.classList.remove("mostrar");
-                setTimeout(() => popup.remove(), 500);
-            }, 3000);
+            setTimeout(() => popup.classList.add("mostrar"), 100);
+            setTimeout(() => { popup.classList.remove("mostrar"); setTimeout(() => popup.remove(), 500); }, 3000);
         }
+
+        carregarProdutos(produtos);
     </script>
 </body>
 </html>
