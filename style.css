@@ -1182,3 +1182,8 @@ button:enabled:hover {
     border-radius: 5px;
     cursor: pointer;
 }
+
+.shipping-price {
+    margin-left: 280px;
+}
+

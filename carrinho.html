@@ -55,28 +55,6 @@
                 </div>
             </div>
 
-            <div class="user-info-form">
-                <label for="name">Nome:</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-
-            <div class="address-form">
-                <label for="street">Rua:</label>
-                <input type="text" id="street" name="street" required>
-
-                <label for="city">Cidade:</label>
-                <input type="text" id="city" name="city" required>
-
-                <label for="country">País:</label>
-                <input type="text" id="country" name="country" required>
-
-                <label for="postal-code">Código Postal:</label>
-                <input type="text" id="postal-code" name="postal-code" required>
-            </div>
-
             <button class="cart-button" onclick="efetuarCompra()">COMPRAR</button>
 
             <div class="payment-methods">
@@ -141,15 +119,6 @@
                 botaoComprar.style.opacity = "1";
                 botaoComprar.style.cursor = "pointer";
             }
-
-            let isLoggedIn = localStorage.getItem("loggedIn");
-            if (isLoggedIn) {
-                let userName = localStorage.getItem("name");
-                let userEmail = localStorage.getItem("loggedUser");
-
-                document.getElementById("name").value = userName || "";
-                document.getElementById("email").value = userEmail || "";
-            }
         });
 
         function removerDoCarrinho(index) {
@@ -160,23 +129,19 @@
         }
 
         function efetuarCompra() {
-            let nome = document.getElementById("name").value;
-            let email = document.getElementById("email").value;
-            let rua = document.getElementById("street").value;
-            let cidade = document.getElementById("city").value;
-            let pais = document.getElementById("country").value;
-            let codigoPostal = document.getElementById("postal-code").value;
+            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
-            if (nome === "" || email === "" || rua === "" || cidade === "" || pais === "" || codigoPostal === "") {
-                alert("Por favor, preencha todos os campos.");
+            if (carrinho.length === 0) {
+                mostrarPopup("O seu carrinho está vazio! Adicione produtos para continuar.");
+                return;
+            }
+
+            let isLoggedIn = localStorage.getItem("loggedIn");
+
+            if (isLoggedIn) {
+                window.location.href = "confirmarcompra.html"; // Redireciona para a página de confirmação de compra
             } else {
-                mostrarPopup("Compra bem-sucedida!");
-
-                setTimeout(() => {
-                    let morada = rua + ", " + cidade + ", " + pais + ", " + codigoPostal;
-                    let popupMessage = `A sua encomenda será entregue em 4 dias úteis em: ${morada}`;
-                    mostrarPopup(popupMessage);
-                }, 2000); 
+                window.location.href = "login.html"; // Redireciona para a página de login
             }
         }
 

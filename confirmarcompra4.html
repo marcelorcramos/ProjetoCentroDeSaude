@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Centro de Saúde Lumiar</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="home.html">
+                <img src="imagens/logocs2-removebg-preview.png" width="140" alt="Centro de Saúde Lumiar">
+            </a>
+        </div>
+        <div class="titulo">
+            <h1>Centro de Saúde Lumiar</h1>
+            <p>Cuide-se para poder cuidar</p>
+        </div>
+    </header>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="sobre.html">Sobre Nós</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="consultas.html">Consultas</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="FAQ.html">FAQ</a>
+        <a href="politicas.html">Políticas de Privacidade</a>
+        <a href="termosdeuso.html">Termos de Uso</a>
+        <div class="favCartProfile">
+            <a href="carrinho.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="favoritos.html"><i class="fa-solid fa-heart"></i></a>
+            <a href="login.html"><i class="fa-solid fa-user"></i></a>
+        </div>
+    </nav>
+    <div class="cart-container">
+        <div class="cart-left">
+            <h2>O meu carrinho<span>1 artigo</span></h2>
+        </div>
+        <div class="cart-right">
+            <div class="cart-summary">
+                <div class="summary-item">
+                    <span>Subtotal</span>
+                    <span id="subtotal">€0,00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Custos de envio estimados</span>
+                    <span id="shipping-cost">€0,00</span>
+                </div>
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span id="total">€0,00</span>
+                </div>
+            </div>
+
+            <!-- Seção de métodos de pagamento -->
+            <div id="payment-section">
+                <div class="payment-options">
+                    <label for="payment-method">Método de Pagamento:</label>
+                    <select id="payment-method" name="payment-method" required>
+                        <option value="" disabled selected>Selecione um método</option>
+                        <option value="Multibanco">Multibanco</option>
+                        <option value="MbWay">MbWay</option>
+                        <option value="PayPal">PayPal</option>
+                    </select>
+                </div>
+
+                <button class="cart-button" onclick="efetuarCompra()">COMPRAR</button>
+
+                <div class="payment-methods">
+                    <img src="imagens/visa_logo.png" alt="VISA">
+                    <img src="imagens/multibanco_logo.png" alt="Multibanco">
+                    <img src="imagens/mbway_logo.png" alt="MBWay">
+                </div>
+            </div>
+
+            <!-- Seção para exibir os dados da compra -->
+            <div id="order-summary" class="order-summary" style="display: none;">
+                <h2>Resumo da Compra</h2>
+                <p><strong>Subtotal:</strong> <span id="order-subtotal">€0,00</span></p>
+                <p><strong>Custo de Envio:</strong> <span id="order-shipping-cost">€0,00</span></p>
+                <p><strong>Total:</strong> <span id="order-total">€0,00</span></p>
+                <p><strong>Método de Pagamento:</strong> <span id="order-payment-method">Nenhum</span></p>
+                <p><strong>Nome:</strong> <span id="order-name">Nenhum</span></p>
+                <p><strong>Email:</strong> <span id="order-email">Nenhum</span></p>
+                <p><strong>Morada:</strong> <span id="order-address">Nenhum</span></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Centro de Saúde Lumiar. Todos os direitos reservados.</p>
+        <p>Feito por: Marcelo Ramos & João Piedade</p>
+    </footer> 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            let container = document.querySelector(".cart-left");
+            let subtotalElem = document.getElementById("subtotal");
+            let shippingCostElem = document.getElementById("shipping-cost");
+            let totalElem = document.getElementById("total");
+
+            if (carrinho.length === 0) {
+                container.innerHTML = ` 
+                    <h2>O meu carrinho <span>0 artigos</span></h2>
+                    <div class="cart-empty">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <p>Carrinho vazio</p>
+                    </div>`;
+                subtotalElem.innerText = "€0,00";
+                shippingCostElem.innerText = "€0,00";
+                totalElem.innerText = "€0,00";
+            } else {
+                let listaHTML = `<h2>O meu carrinho <span>${carrinho.length} artigo(s)</span></h2><ul>`;
+                let subtotal = 0;
+
+                carrinho.forEach((produto, index) => {
+                    subtotal += parseFloat(produto.preco.replace("€", "").replace(",", "."));
+                    listaHTML += ` 
+                        <li class="cart-item">
+                            <img src="${produto.imagem}" width="80">
+                            <span>${produto.nome}</span>
+                            <span>${produto.preco}</span>
+                            <button onclick="removerDoCarrinho(${index})">Remover</button>
+                        </li>`;
+                });
+
+                listaHTML += `</ul>`;
+                container.innerHTML = listaHTML;
+
+                // Recuperar o custo de envio do localStorage
+                let shippingCost = parseFloat(localStorage.getItem("shippingCost")) || 2.90;
+
+                // Atualizar os valores na interface
+                subtotalElem.innerText = `€${subtotal.toFixed(2).replace(".", ",")}`;
+                shippingCostElem.innerText = `€${shippingCost.toFixed(2).replace(".", ",")}`;
+                totalElem.innerText = `€${(subtotal + shippingCost).toFixed(2).replace(".", ",")}`;
+            }
+        });
+
+        function removerDoCarrinho(index) {
+            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            carrinho.splice(index, 1); 
+            localStorage.setItem("carrinho", JSON.stringify(carrinho));
+            location.reload(); 
+        }
+
+        function efetuarCompra() {
+            let paymentMethod = document.getElementById("payment-method").value;
+            let subtotalElem = document.getElementById("subtotal");
+            let shippingCostElem = document.getElementById("shipping-cost");
+            let totalElem = document.getElementById("total");
+
+            let subtotal = parseFloat(subtotalElem.innerText.replace("€", "").replace(",", "."));
+            let shippingCost = parseFloat(shippingCostElem.innerText.replace("€", "").replace(",", "."));
+
+            if (!paymentMethod) {
+                alert("Por favor, selecione um método de pagamento.");
+                return;
+            }
+
+            let total = subtotal + shippingCost;
+
+            // Armazenar os dados no localStorage
+            localStorage.setItem("totalCompra", total.toFixed(2));
+            localStorage.setItem("paymentMethod", paymentMethod);
+
+            // Exibir os dados da compra no lugar da seção de métodos de pagamento
+            exibirResumoCompra(subtotal, shippingCost, total, paymentMethod);
+
+            // Exibir o pop-up com o tempo de entrega
+            exibirPopupEntrega();
+        }
+
+        function exibirResumoCompra(subtotal, shippingCost, total, paymentMethod) {
+            let paymentSection = document.getElementById("payment-section");
+            let orderSummary = document.getElementById("order-summary");
+            let orderSubtotal = document.getElementById("order-subtotal");
+            let orderShippingCost = document.getElementById("order-shipping-cost");
+            let orderTotal = document.getElementById("order-total");
+            let orderPaymentMethod = document.getElementById("order-payment-method");
+            let orderName = document.getElementById("order-name");
+            let orderEmail = document.getElementById("order-email");
+            let orderAddress = document.getElementById("order-address");
+
+            // Recuperar os dados do usuário do localStorage
+            let nome = localStorage.getItem("nome") || "Nenhum";
+            let email = localStorage.getItem("email") || "Nenhum";
+            let rua = localStorage.getItem("rua") || "Nenhum";
+            let cidade = localStorage.getItem("cidade") || "Nenhum";
+            let pais = localStorage.getItem("pais") || "Nenhum";
+            let codigoPostal = localStorage.getItem("codigoPostal") || "Nenhum";
+
+            // Montar a morada completa
+            let moradaCompleta = `${rua}, ${cidade}, ${pais}, ${codigoPostal}`;
+
+            // Atualizar os valores na seção de resumo
+            orderSubtotal.innerText = `€${subtotal.toFixed(2).replace(".", ",")}`;
+            orderShippingCost.innerText = `€${shippingCost.toFixed(2).replace(".", ",")}`;
+            orderTotal.innerText = `€${total.toFixed(2).replace(".", ",")}`;
+            orderPaymentMethod.innerText = paymentMethod;
+            orderName.innerText = nome;
+            orderEmail.innerText = email;
+            orderAddress.innerText = moradaCompleta;
+
+            // Ocultar a seção de métodos de pagamento e exibir a seção de resumo
+            paymentSection.style.display = "none";
+            orderSummary.style.display = "block";
+        }
+
+        function exibirPopupEntrega() {
+            // Recuperar o tipo de envio do localStorage
+            let shippingOption = localStorage.getItem("shippingOption");
+
+            // Definir o tempo de entrega com base no tipo de envio
+            let tempoEntrega;
+            if (shippingOption === "standard") {
+                tempoEntrega = "5-7 dias úteis";
+            } else if (shippingOption === "express") {
+                tempoEntrega = "2-3 dias úteis";
+            } else {
+                tempoEntrega = "dias não especificados";
+            }
+
+            // Exibir o pop-up com a mensagem de entrega
+            alert(`Compra efetuada com sucesso! Sua encomenda vai chegar em ${tempoEntrega}.`);
+        }
+    </script>
+</body>
+</html>
