@@ -1187,3 +1187,51 @@ button:enabled:hover {
     margin-left: 280px;
 }
 
+@media (min-width: 600px) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header .titulo h1 {
+        font-size: 2em;
+    }
+
+    nav {
+        justify-content: space-around;
+    }
+
+    .cart-container {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .cart-left {
+        width: 60%;
+    }
+
+    .cart-right {
+        width: 40%;
+    }
+
+    .cart-button {
+        width: auto;
+    }
+}
+
+/* Estilos para desktops */
+@media (min-width: 900px) {
+    nav {
+        justify-content: flex-start;
+    }
+
+    nav a {
+        font-size: 1em;
+    }
+
+    .cart-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
