@@ -1235,3 +1235,32 @@ button:enabled:hover {
         margin: 0 auto;
     }
 }
+
+.floating-button {
+    position: fixed;
+    bottom: 40px;
+    right: 50px;
+    z-index: 1000;
+}
+
+.floating-button .float {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    background-color: #004080;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.floating-button .float:hover {
+    background-color: red;
+}
+
+.floating-button .float i {
+    font-size: 24px;
+}
