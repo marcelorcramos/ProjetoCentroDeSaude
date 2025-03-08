@@ -1231,7 +1231,6 @@ button:enabled:hover {
     }
 }
 
-/* Estilos para desktops */
 @media (min-width: 900px) {
     nav {
         justify-content: flex-start;
@@ -1301,3 +1300,68 @@ select:focus {
     outline: none;
 }
 }
+
+.container-admin {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.sidebar {
+    width: 250px;
+    background: #333;
+    color: white;
+    height: 100vh;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.sidebar ul li:hover {
+    background: #444;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+input[type='text'], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.container-admin button {
+    padding: 8px 12px; /* Reduzindo o padding */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px; /* Reduzindo o tamanho da fonte */
+}
+
+.container-admin .save { background: orange; color: white; }
+.container-admin .publish { background: green; color: white; }
+.container-admin .delete { background: red; color: white; }
+.container-admin .home { background: blue; color: white; margin-top: 10px; }
