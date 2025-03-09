@@ -206,3 +206,35 @@ body {
     gap: 10px;
     margin-top: 10px;
 }
+
+.product-actions {
+    margin-top: 10px;
+}
+
+.product-actions button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.product-actions button.edit {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.product-actions button.edit:hover {
+    background-color: #2980b9;
+}
+
+.product-actions button.delete {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.product-actions button.delete:hover {
+    background-color: #c0392b;
+}
