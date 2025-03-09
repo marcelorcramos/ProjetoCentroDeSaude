@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Admin</title>
+    <title>Lista de Produtos</title>
     <link rel="stylesheet" href="style2.css">
 </head>
 <body>
@@ -11,42 +11,21 @@
         <div class="sidebar">
             <h2>Painel Admin</h2>
             <ul>
-                <li>Criar Produto</li>
-                <a href="adminlista.html">
-                    <li>Lista de Produtos</li>
+                <a href="admin.html">
+                    <li>Criar Produto</li>
                 </a>
+                <li>Lista de Produtos</li>
                 <a href="home.html"><button class="home">Voltar para Home</button></a>
             </ul>
         </div>
         <div class="content">
-            <h1>Criar Produtos</h1>
-            <div class="form-group">
-                <label for="title">Título do Produto</label>
-                <input type="text" id="title" placeholder="Digite o título">
-            </div>
-            <div class="form-group">
-                <label for="content">Descrição</label>
-                <textarea id="content" rows="10" placeholder="Escreva sua descrição..."></textarea>
-            </div>
-            <div class="form-group">
-                <label for="price">Valor do Produto ($)</label>
-                <input type="number" id="price" placeholder="Digite o valor" step="0.01" min="0">
-            </div>
-            <div class="form-group">
-                <label for="images">Upload de Imagens</label>
-                <input type="file" id="images" accept="image/*" multiple>
-                <small>Selecione uma ou mais imagens.</small>
-            </div>
-            <div class="buttons">
-                <button class="save">Salvar Produto</button>
-                <button class="publish">Publicar Produto</button>
-                <button class="delete">Excluir Produto</button>
-            </div>
+            <h1>Lista de Produtos</h1>
+            <div id="product-list"></div>
         </div>
     </div>
     <script>
-        // Função para salvar um produto no LocalStorage
-        function saveProduct(event) {
+
+function saveProduct(event) {
             event.preventDefault();
 
             // Captura os valores dos campos
@@ -116,7 +95,7 @@
                 productItem.innerHTML = `
                     <h3>${product.title}</h3>
                     <p>${product.content}</p>
-                    <p><strong>Preço:</strong> R$ ${product.price}</p>
+                    <p><strong>Preço:</strong> $${product.price}</p>
                     <div class="product-images">
                         ${product.images.map(image => `<img src="${image}" alt="${product.title}" width="100">`).join('')}
                     </div>
