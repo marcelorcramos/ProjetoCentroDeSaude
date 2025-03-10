@@ -43,32 +43,27 @@
         </div>
     </div>
     <script>
-        // Função para salvar um produto no LocalStorage
         function saveProduct(event) {
             event.preventDefault();
 
-            // Captura os valores dos campos
             const title = document.getElementById('title').value;
             const content = document.getElementById('content').value;
             const price = document.getElementById('price').value;
             const images = document.getElementById('images').files;
 
-            // Verifica se os campos obrigatórios estão preenchidos
             if (!title || !content || !price) {
                 alert('Preencha todos os campos obrigatórios!');
                 return;
             }
 
-            // Cria um objeto para representar o produto
             const product = {
-                id: new Date().getTime(), // ID único baseado no timestamp
+                id: new Date().getTime(),
                 title: title,
                 content: content,
                 price: parseFloat(price).toFixed(2),
                 images: []
             };
 
-            // Converte as imagens para URLs (opcional)
             if (images.length > 0) {
                 for (let i = 0; i < images.length; i++) {
                     const reader = new FileReader();
@@ -79,16 +74,12 @@
                 }
             }
 
-            // Recupera a lista de produtos do LocalStorage
             let products = JSON.parse(localStorage.getItem('products')) || [];
 
-            // Adiciona o novo produto à lista
             products.push(product);
 
-            // Salva a lista atualizada no LocalStorage
             localStorage.setItem('products', JSON.stringify(products));
 
-            // Limpa os campos do formulário
             document.getElementById('title').value = '';
             document.getElementById('content').value = '';
             document.getElementById('price').value = '';
@@ -97,17 +88,13 @@
             alert('Produto salvo com sucesso!');
         }
 
-        // Função para carregar e exibir os produtos na página adminlista.html
         function loadProducts() {
             const productList = document.getElementById('product-list');
 
-            // Recupera a lista de produtos do LocalStorage
             const products = JSON.parse(localStorage.getItem('products')) || [];
 
-            // Limpa a lista atual
             productList.innerHTML = '';
 
-            // Exibe cada produto na lista
             products.forEach(product => {
                 const productItem = document.createElement('div');
                 productItem.className = 'product-item';
@@ -123,14 +110,12 @@
             });
         }
 
-        // Adiciona o evento de salvar produto ao botão "Salvar Produto"
         document.addEventListener('DOMContentLoaded', function () {
             const saveButton = document.querySelector('.save');
             if (saveButton) {
                 saveButton.addEventListener('click', saveProduct);
             }
 
-            // Carrega os produtos na página adminlista.html
             if (window.location.pathname.includes('adminlista.html')) {
                 loadProducts();
             }
