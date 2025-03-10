@@ -1,6 +1,6 @@
 function carregarFavoritos() {
     const container = document.querySelector('.favoritos-container');
-    container.innerHTML = ''; // Limpar antes de carregar
+    container.innerHTML = '';
 
     const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
 
@@ -21,7 +21,6 @@ function carregarFavoritos() {
         container.appendChild(div);
     });
 
-    // Adicionar eventos de remoção
     document.querySelectorAll('.btn-remover').forEach(button => {
         button.addEventListener('click', (event) => {
             const nomeProduto = event.target.previousElementSibling.previousElementSibling.innerText;

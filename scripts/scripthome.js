@@ -9,12 +9,10 @@ function adicionarFavorito(elemento) {
     const index = favoritos.findIndex(item => item.nome === nome);
 
     if (index === -1) {
-        // Adicionar aos favoritos
         favoritos.push({ nome, imagem, preco });
         elemento.classList.remove('fa-regular');
         elemento.classList.add('fa-solid');
     } else {
-        // Remover dos favoritos
         favoritos.splice(index, 1);
         elemento.classList.remove('fa-solid');
         elemento.classList.add('fa-regular');

@@ -33,10 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
         listaHTML += `</ul>`;
         container.innerHTML = listaHTML;
 
-        // Recuperar o custo de envio do localStorage
         let shippingCost = parseFloat(localStorage.getItem("shippingCost")) || 2.90;
 
-        // Atualizar os valores na interface
         subtotalElem.innerText = `€${subtotal.toFixed(2).replace(".", ",")}`;
         shippingCostElem.innerText = `€${shippingCost.toFixed(2).replace(".", ",")}`;
         totalElem.innerText = `€${(subtotal + shippingCost).toFixed(2).replace(".", ",")}`;
@@ -66,14 +64,11 @@ function efetuarCompra() {
 
     let total = subtotal + shippingCost;
 
-    // Armazenar os dados no localStorage
     localStorage.setItem("totalCompra", total.toFixed(2));
     localStorage.setItem("paymentMethod", paymentMethod);
 
-    // Exibir os dados da compra no lugar da seção de métodos de pagamento
     exibirResumoCompra(subtotal, shippingCost, total, paymentMethod);
 
-    // Exibir o pop-up com o tempo de entrega
     exibirPopupEntrega();
 }
 
@@ -88,7 +83,6 @@ function exibirResumoCompra(subtotal, shippingCost, total, paymentMethod) {
     let orderEmail = document.getElementById("order-email");
     let orderAddress = document.getElementById("order-address");
 
-    // Recuperar os dados do usuário do localStorage
     let nome = localStorage.getItem("nome") || "Nenhum";
     let email = localStorage.getItem("email") || "Nenhum";
     let rua = localStorage.getItem("rua") || "Nenhum";
@@ -96,10 +90,8 @@ function exibirResumoCompra(subtotal, shippingCost, total, paymentMethod) {
     let pais = localStorage.getItem("pais") || "Nenhum";
     let codigoPostal = localStorage.getItem("codigoPostal") || "Nenhum";
 
-    // Montar a morada completa
     let moradaCompleta = `${rua}, ${cidade}, ${pais}, ${codigoPostal}`;
 
-    // Atualizar os valores na seção de resumo
     orderSubtotal.innerText = `€${subtotal.toFixed(2).replace(".", ",")}`;
     orderShippingCost.innerText = `€${shippingCost.toFixed(2).replace(".", ",")}`;
     orderTotal.innerText = `€${total.toFixed(2).replace(".", ",")}`;
@@ -108,16 +100,13 @@ function exibirResumoCompra(subtotal, shippingCost, total, paymentMethod) {
     orderEmail.innerText = email;
     orderAddress.innerText = moradaCompleta;
 
-    // Ocultar a seção de métodos de pagamento e exibir a seção de resumo
     paymentSection.style.display = "none";
     orderSummary.style.display = "block";
 }
 
 function exibirPopupEntrega() {
-    // Recuperar o tipo de envio do localStorage
     let shippingOption = localStorage.getItem("shippingOption");
 
-    // Definir o tempo de entrega com base no tipo de envio
     let tempoEntrega;
     if (shippingOption === "standard") {
         tempoEntrega = "5-7 dias úteis";
@@ -127,6 +116,5 @@ function exibirPopupEntrega() {
         tempoEntrega = "dias não especificados";
     }
 
-    // Exibir o pop-up com a mensagem de entrega
     alert(`Compra efetuada com sucesso! Sua encomenda vai chegar em ${tempoEntrega}.`);
 }

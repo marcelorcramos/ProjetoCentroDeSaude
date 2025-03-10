@@ -86,11 +86,9 @@ function efetuarCompra() {
 
     let total = subtotal + shippingCost;
 
-    // Armazenar os dados no localStorage para uso na próxima página
     localStorage.setItem("totalCompra", total.toFixed(2));
     localStorage.setItem("shippingOption", selectedShippingOption.value);
     localStorage.setItem("shippingCost", shippingCost.toFixed(2));
 
-    // Redirecionar para a página de confirmação de compra
     window.location.href = "confirmarcompra4.html";
 }

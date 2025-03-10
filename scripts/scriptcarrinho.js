@@ -59,9 +59,9 @@ function efetuarCompra() {
     let isLoggedIn = localStorage.getItem("loggedIn");
 
     if (isLoggedIn) {
-        window.location.href = "confirmarcompra.html"; // Redireciona para a página de confirmação de compra
+        window.location.href = "confirmarcompra.html";
     } else {
-        window.location.href = "login.html"; // Redireciona para a página de login
+        window.location.href = "login.html";
     }
 }
 

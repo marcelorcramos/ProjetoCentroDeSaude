@@ -68,7 +68,6 @@ function efetuarCompra() {
     if (nome === "" || email === "" || rua === "" || cidade === "" || pais === "" || codigoPostal === "") {
         alert("Por favor, preencha todos os campos.");
     } else {
-        // Salva as informações do formulário para passar para a próxima página (confirmacompra2.html)
         localStorage.setItem("nome", nome);
         localStorage.setItem("email", email);
         localStorage.setItem("rua", rua);
@@ -76,7 +75,6 @@ function efetuarCompra() {
         localStorage.setItem("pais", pais);
         localStorage.setItem("codigoPostal", codigoPostal);
 
-        // Redireciona para a página de confirmação
         window.location.href = "confirmarcompra2.html";
     }
 }

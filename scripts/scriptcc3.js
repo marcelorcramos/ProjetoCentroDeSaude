@@ -33,10 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
         listaHTML += `</ul>`;
         container.innerHTML = listaHTML;
 
-        // Definir custo de envio (exemplo: €2,90 para envio padrão)
         let shippingCost = 2.90;
 
-        // Atualizar os valores na interface
         subtotalElem.innerText = `€${subtotal.toFixed(2).replace(".", ",")}`;
         shippingCostElem.innerText = `€${shippingCost.toFixed(2).replace(".", ",")}`;
         totalElem.innerText = `€${(subtotal + shippingCost).toFixed(2).replace(".", ",")}`;
@@ -66,10 +64,8 @@ function efetuarCompra() {
 
     let total = subtotal + shippingCost;
 
-    // Armazenar os dados no localStorage para uso na próxima página
     localStorage.setItem("totalCompra", total.toFixed(2));
     localStorage.setItem("paymentMethod", paymentMethod);
 
-    // Redirecionar para a página de confirmação de compra
     window.location.href = "confirmarcompra4.html";
 }
