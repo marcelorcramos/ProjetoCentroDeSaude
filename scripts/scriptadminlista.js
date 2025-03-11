@@ -1,3 +1,4 @@
+let editingProductIndex = null; // Variável para armazenar o índice do produto em edição
 
 function saveProduct(event) {
     event.preventDefault();
@@ -13,7 +14,7 @@ function saveProduct(event) {
     }
 
     const product = {
-        id: new Date().getTime(),
+        id: editingProductIndex !== null ? editingProductIndex : new Date().getTime(), // Mantém o ID se estiver editando
         title: title,
         content: content,
         price: parseFloat(price).toFixed(2),
@@ -32,7 +33,14 @@ function saveProduct(event) {
 
     let products = JSON.parse(localStorage.getItem('products')) || [];
 
-    products.push(product);
+    if (editingProductIndex !== null) {
+        // Se estiver editando, substitui o produto existente
+        products[editingProductIndex] = product;
+        editingProductIndex = null; // Reseta o índice de edição
+    } else {
+        // Se for um novo produto, adiciona à lista
+        products.push(product);
+    }
 
     localStorage.setItem('products', JSON.stringify(products));
 
@@ -42,6 +50,7 @@ function saveProduct(event) {
     document.getElementById('images').value = '';
 
     alert('Produto salvo com sucesso!');
+    window.location.href = 'adminlista.html'; // Redireciona para a lista de produtos
 }
 
 function loadProducts() {
@@ -80,17 +89,16 @@ function editProduct(index) {
 
     const product = products[index];
 
+    // Preenche o formulário com os dados do produto
     document.getElementById('title').value = product.title;
     document.getElementById('content').value = product.content;
     document.getElementById('price').value = product.price;
 
-    products.splice(index, 1);
+    // Define o índice do produto em edição
+    editingProductIndex = index;
 
-    localStorage.setItem('products', JSON.stringify(products));
-
-    loadProducts();
-
-    alert('Produto carregado para edição!');
+    // Redireciona para a página de edição
+    window.location.href = 'admin.html';
 }
 
 function deleteProduct(index) {

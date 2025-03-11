@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Admin</title>
+    <title>Criar/Editar Produto</title>
     <link rel="stylesheet" href="styleadmins.css">
 </head>
 <body>
@@ -11,7 +11,9 @@
         <div class="sidebar">
             <h2>Painel Admin</h2>
             <ul>
-                <li>Criar Produto</li>
+                <a href="admin.html">
+                    <li>Criar Produto</li>
+                </a>
                 <a href="adminlista.html">
                     <li>Lista de Produtos</li>
                 </a>
@@ -19,27 +21,29 @@
             </ul>
         </div>
         <div class="content">
-            <h1>Criar Produtos</h1>
-            <div class="form-group">
-                <label for="title">Título do Produto</label>
-                <input type="text" id="title" placeholder="Digite o título">
-            </div>
-            <div class="form-group">
-                <label for="content">Descrição</label>
-                <textarea id="content" rows="10" placeholder="Escreva sua descrição..."></textarea>
-            </div>
-            <div class="form-group">
-                <label for="price">Valor do Produto ($)</label>
-                <input type="number" id="price" placeholder="Digite o valor" step="0.01" min="0">
-            </div>
-            <div class="form-group">
-                <label for="images">Upload de Imagens</label>
-                <input type="file" id="images" accept="image/*" multiple>
-                <small>Selecione uma ou mais imagens.</small>
-            </div>
-            <div class="buttons">
-                <button class="save">Salvar Produto</button>
-            </div>
+            <h1>Criar/Editar Produto</h1>
+            <form id="product-form">
+                <div class="form-group">
+                    <label for="title">Título do Produto</label>
+                    <input type="text" id="title" placeholder="Digite o título">
+                </div>
+                <div class="form-group">
+                    <label for="content">Descrição</label>
+                    <textarea id="content" rows="10" placeholder="Escreva sua descrição..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="price">Valor do Produto ($)</label>
+                    <input type="number" id="price" placeholder="Digite o valor" step="0.01" min="0">
+                </div>
+                <div class="form-group">
+                    <label for="images">Upload de Imagens</label>
+                    <input type="file" id="images" accept="image/*" multiple>
+                    <small>Selecione uma ou mais imagens.</small>
+                </div>
+                <div class="buttons">
+                    <button type="submit" class="save">Salvar Produto</button>
+                </div>
+            </form>
         </div>
     </div>
     <script src="scripts/scriptadmin.js"></script>
