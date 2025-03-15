@@ -73,3 +73,5 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e enviar 
 ## 📜 Licença
 Este projeto está sob a licença MIT.
 
+## Feito por João Piedade & Marcelo Ramos
+
