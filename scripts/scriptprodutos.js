@@ -21,12 +21,13 @@ function carregarProdutos(lista) {
             ${produto.precoAntigo ? `<p class='preco-antigo'>${produto.precoAntigo.toFixed(2)} €</p>` : ""}
             <div class='actions'>
                 <button class='btn-servico' onclick='adicionarAoCarrinho(this)'>${produto.preco.toFixed(2)} €</button>
-                <i class='fa-regular fa-heart' onclick='adicionarFavorito(this)'></i>
+                <img src='imagens/fav.webp' alt='Adicionar aos favoritos' class='fav-icon' onclick='adicionarFavorito(this)'>
             </div>
         </div>`;
         container.innerHTML += item;
     });
 }
+
 
 function ordenarProdutos() {
     let criterio = document.getElementById("sort").value;
