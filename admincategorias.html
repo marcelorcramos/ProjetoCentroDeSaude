@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Produtos</title>
+    <title>Gestão de Categorias</title>
     <link rel="stylesheet" href="styleadmins.css">
 </head>
 <body>
@@ -26,11 +26,149 @@
                 <a href="home.html"><button class="home">Voltar para Home</button></a>
             </ul>
         </div>
-        <div class="content">
+        
+        <div class="admin-container">
             <h1>Gestão de Categorias</h1>
-            <div id="product-list"></div>
+            
+            <section class="categories-section">
+                <div class="section-header">
+                    <h2>Categorias Existentes</h2>
+                    <button id="showAddFormBtn" class="btn btn-add">Adicionar Nova Categoria</button>
+                </div>
+                
+                <div class="categories-list">
+
+                    <div class="category-card" data-id="1">
+                        <div class="category-info">
+                            <h3 class="category-name">Locomoção</h3>
+                            <p class="category-description">Produtos que ajudam utentes em sua locomoção</p>
+                            <span class="product-count">25 produtos</span>
+                        </div>
+                        <div class="category-actions">
+                            <button class="btn btn-edit edit-category" data-id="1">Editar</button>
+                            <button class="btn btn-delete delete-category" data-id="1">Eliminar</button>
+                        </div>
+                    </div>
+
+                    <div class="category-card" data-id="2">
+                        <div class="category-info">
+                            <h3 class="category-name">Remédios Orais</h3>
+                            <p class="category-description">Remédios Orais de nossos utentes</p>
+                            <span class="product-count">42 produtos</span>
+                        </div>
+                        <div class="category-actions">
+                            <button class="btn btn-edit edit-category" data-id="2">Editar</button>
+                            <button class="btn btn-delete delete-category" data-id="2">Eliminar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" data-id="3">
+                        <div class="category-info">
+                            <h3 class="category-name">Aparelhos de medição</h3>
+                            <p class="category-description">Aparelhos que auxiliam nossos utentes com suas medições</p>
+                            <span class="product-count">18 produtos</span>
+                        </div>
+                        <div class="category-actions">
+                            <button class="btn btn-edit edit-category" data-id="3">Editar</button>
+                            <button class="btn btn-delete delete-category" data-id="3">Eliminar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" data-id="4">
+                        <div class="category-info">
+                            <h3 class="category-name">Remédios Não-Orais</h3>
+                            <p class="category-description">Remédios Não-Orais de nossos utentes</p>
+                            <span class="product-count">33 produtos</span>
+                        </div>
+                        <div class="category-actions">
+                            <button class="btn btn-edit edit-category" data-id="4">Editar</button>
+                            <button class="btn btn-delete delete-category" data-id="4">Eliminar</button>
+                        </div>
+                    </div>
+
+                    <div class="category-card" data-id="5">
+                        <div class="category-info">
+                            <h3 class="category-name">Artigos para musculatura</h3>
+                            <p class="category-description">Artigos que auxiliam nossos utentes com seus problemas musculares</p>
+                            <span class="product-count">15 produtos</span>
+                        </div>
+                        <div class="category-actions">
+                            <button class="btn btn-edit edit-category" data-id="5">Editar</button>
+                            <button class="btn btn-delete delete-category" data-id="5">Eliminar</button>
+                        </div>
+                    </div>
+                    
+                    <template id="category-template">
+                        <div class="category-card" data-id="">
+                            <div class="category-info">
+                                <h3 class="category-name"></h3>
+                                <p class="category-description"></p>
+                                <span class="product-count"></span>
+                            </div>
+                            <div class="category-actions">
+                                <button class="btn btn-edit edit-category">Editar</button>
+                                <button class="btn btn-delete delete-category">Eliminar</button>
+                            </div>
+                        </div>
+                    </template>
+                    
+                    <div id="no-categories" class="no-items" style="display: none;">
+                        <p>Nenhuma categoria encontrada. Adicione uma nova categoria para começar.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="category-form-section" class="form-section" style="display: none;">
+                <div class="section-header">
+                    <h2 id="form-title">Adicionar Nova Categoria</h2>
+                </div>
+                
+                <form id="category-form" class="admin-form">
+                    <input type="hidden" id="category-id" name="category-id" value="">
+                    
+                    <div class="form-group">
+                        <label for="category-name">Nome da Categoria:</label>
+                        <input type="text" id="category-name" name="category-name" required>
+                        <small class="form-hint">O nome deve ser único e descritivo</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="category-description">Descrição:</label>
+                        <textarea id="category-description" name="category-description" rows="4"></textarea>
+                        <small class="form-hint">Descreva brevemente o tipo de produtos que pertencem a esta categoria</small>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="cancel-form" class="btn btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn btn-save">Guardar</button>
+                    </div>
+                </form>
+            </section>
         </div>
     </div>
+
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirmar Eliminação</h3>
+            </div>
+            
+            <div class="modal-body">
+                <p id="delete-message">Tem certeza que deseja eliminar esta categoria?</p>
+                
+                <div id="products-warning" class="warning-message" style="display: none;">
+                    <strong>Atenção!</strong>
+                    <p id="warning-text">Esta categoria possui produtos associados. Ao eliminar, estes produtos ficarão sem categoria.</p>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button id="cancel-delete" class="btn btn-cancel">Cancelar</button>
+                <button id="confirm-delete" class="btn btn-danger">Eliminar</button>
+            </div>
+        </div>
+    </div>
+    
     <script src="scripts/scriptadmincategorias.js"></script>
 </body>
 </html>
