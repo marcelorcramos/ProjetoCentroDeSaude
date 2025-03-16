@@ -1,4 +1,3 @@
-// Dados de exemplo para utilizadores (em um cenário real, estes viriam de uma API)
 let users = [
     { id: 1, name: "João Silva", email: "joao@exemplo.com", registerDate: "2023-05-10", status: "ativo", purchases: [
         { id: 101, date: "2023-06-15", total: 120.50, items: 3 },
@@ -33,7 +32,6 @@ let users = [
     ]}
 ];
 
-// Elementos do DOM
 const usersTableBody = document.getElementById('usersTableBody');
 const searchInput = document.getElementById('searchInput');
 const searchType = document.getElementById('searchType');
@@ -48,10 +46,8 @@ const detailsModal = document.getElementById('detailsModal');
 const userDetailsContent = document.getElementById('userDetailsContent');
 const closeDetailsButton = document.getElementById('closeDetailsButton');
 
-// Variável para armazenar a ação pendente
 let pendingAction = null;
 
-// Renderizar a tabela de utilizadores
 function renderUsersTable(filteredUsers = users) {
     usersTableBody.innerHTML = '';
     
@@ -65,11 +61,9 @@ function renderUsersTable(filteredUsers = users) {
     filteredUsers.forEach(user => {
         const row = document.createElement('tr');
         
-        // Formatação da data
         const registerDate = new Date(user.registerDate);
         const formattedDate = registerDate.toLocaleDateString('pt-PT');
         
-        // Define a classe para o status
         const statusClass = user.status === 'ativo' ? 'status-active' : 'status-inactive';
         
         row.innerHTML = `
@@ -88,13 +82,10 @@ function renderUsersTable(filteredUsers = users) {
         usersTableBody.appendChild(row);
     });
     
-    // Adicionar event listeners aos botões
     addButtonEventListeners();
 }
 
-// Adicionar event listeners aos botões de ação
 function addButtonEventListeners() {
-    // Botões de toggle status
     document.querySelectorAll('.btn-toggle-status').forEach(button => {
         button.addEventListener('click', function() {
             const userId = parseInt(this.getAttribute('data-id'));
@@ -104,24 +95,20 @@ function addButtonEventListeners() {
                 const newStatus = user.status === 'ativo' ? 'inativo' : 'ativo';
                 const action = user.status === 'ativo' ? 'desativar' : 'ativar';
                 
-                // Configurar modal de confirmação
                 confirmTitle.textContent = `Confirmar ${action}`;
                 confirmMessage.textContent = `Tem certeza que deseja ${action} o utilizador ${user.name}?`;
                 
-                // Armazenar ação pendente
                 pendingAction = {
                     type: 'toggleStatus',
                     userId: userId,
                     newStatus: newStatus
                 };
                 
-                // Mostrar modal apenas quando o botão for clicado
                 confirmModal.style.display = 'flex';
             }
         });
     });
     
-    // Botões de ver detalhes
     document.querySelectorAll('.btn-view-details').forEach(button => {
         button.addEventListener('click', function() {
             const userId = parseInt(this.getAttribute('data-id'));
@@ -130,19 +117,16 @@ function addButtonEventListeners() {
     });
 }
 
-// Filtrar usuários com base na pesquisa e filtros
 function filterUsers() {
     const searchValue = searchInput.value.toLowerCase();
     const searchOption = searchType.value;
     const statusOption = statusFilter.value;
     
     const filteredUsers = users.filter(user => {
-        // Filtro de status
         if (statusOption !== 'all' && user.status !== statusOption) {
             return false;
         }
         
-        // Filtro de pesquisa
         if (searchValue) {
             if (searchOption === 'name' || searchOption === 'all') {
                 if (user.name.toLowerCase().includes(searchValue)) {
@@ -165,7 +149,6 @@ function filterUsers() {
     renderUsersTable(filteredUsers);
 }
 
-// Função para mostrar detalhes do utilizador
 function showUserDetails(userId) {
     const user = users.find(user => user.id === userId);
     
@@ -230,12 +213,10 @@ function showUserDetails(userId) {
             ${interactionsHtml}
         `;
         
-        // Mostrar modal apenas quando o botão "Ver Mais" for clicado
         detailsModal.style.display = 'flex';
     }
 }
 
-// Função para obter label do tipo de interação
 function getInteractionTypeLabel(type) {
     const types = {
         'login': 'Login',
@@ -246,48 +227,40 @@ function getInteractionTypeLabel(type) {
     return types[type] || type;
 }
 
-// Função para alternar o status do utilizador
 function toggleUserStatus(userId, newStatus) {
     const userIndex = users.findIndex(user => user.id === userId);
     
     if (userIndex !== -1) {
         users[userIndex].status = newStatus;
-        filterUsers(); // Atualizar a tabela
+        filterUsers();
     }
 }
 
-// Event Listeners
 searchInput.addEventListener('input', filterUsers);
 searchType.addEventListener('change', filterUsers);
 statusFilter.addEventListener('change', filterUsers);
 
-// Modal de confirmação - botão de confirmar
 confirmButton.addEventListener('click', function() {
     if (pendingAction) {
         if (pendingAction.type === 'toggleStatus') {
             toggleUserStatus(pendingAction.userId, pendingAction.newStatus);
         }
         
-        // Resetar ação pendente
         pendingAction = null;
         
-        // Fechar modal
         confirmModal.style.display = 'none';
     }
 });
 
-// Modal de confirmação - botão de cancelar
 cancelButton.addEventListener('click', function() {
     pendingAction = null;
     confirmModal.style.display = 'none';
 });
 
-// Modal de detalhes - botão de fechar
 closeDetailsButton.addEventListener('click', function() {
     detailsModal.style.display = 'none';
 });
 
-// Fechar modais ao clicar fora deles
 window.addEventListener('click', function(event) {
     if (event.target === confirmModal) {
         pendingAction = null;
@@ -299,11 +272,9 @@ window.addEventListener('click', function(event) {
     }
 });
 
-// Inicializar a tabela ao carregar a página
 document.addEventListener('DOMContentLoaded', function() {
     renderUsersTable();
     
-    // Garantir que os modais estejam ocultos inicialmente
     confirmModal.style.display = 'none';
     detailsModal.style.display = 'none';
 });

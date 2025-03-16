@@ -297,7 +297,6 @@ hr {
     border-radius: 10px;
 }
 
-/* Media Queries para Responsividade */
 @media (max-width: 768px) {
     header {
         flex-direction: column;
@@ -691,13 +690,13 @@ hr {
 
 .consulta-item img {
     width: 100%;
-    max-width: 200px; /* Define uma largura máxima para a imagem */
+    max-width: 200px;
     height: auto;
     border-radius: 8px;
     margin-bottom: 10px;
     display: block;
     margin-left: auto;
-    margin-right: auto; /* Centraliza a imagem horizontalmente */
+    margin-right: auto;
 }
 
 .consulta-item .actions {
@@ -1109,7 +1108,7 @@ button:enabled:hover {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-top: auto; /* Mantém o botão na parte inferior */
+    margin-top: auto;
 }
 
 .preco-antigo {
@@ -1117,8 +1116,8 @@ button:enabled:hover {
     color: #888;
     font-size: 17px;
     margin-bottom: 5px;
-    width: 100%; /* Garante que o preço antigo ocupe toda a largura disponível */
-    text-align: center; /* Centraliza o texto do preço antigo */
+    width: 100%;
+    text-align: center;
 }
 
 .preco-novo {
@@ -1131,7 +1130,7 @@ button:enabled:hover {
 .btn-servico {
     flex-grow: 0;
     white-space: nowrap;
-    width: 100%; /* O botão ocupa toda a largura disponível */
+    width: 100%;
 }
 
 .btn-servico:hover {

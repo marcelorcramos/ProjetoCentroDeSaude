@@ -188,7 +188,6 @@ function loadProducts() {
             </div>
         `;
         
-        // Formulário de edição (inicialmente oculto)
         const editMode = document.createElement('div');
         editMode.className = 'edit-mode';
         editMode.style.display = 'none';

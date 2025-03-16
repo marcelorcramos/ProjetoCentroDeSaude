@@ -1,6 +1,4 @@
-// Simplified data and functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // DOM Elements
     const categoriesList = document.querySelector('.categories-list');
     const formSection = document.getElementById('category-form-section');
     const categoryForm = document.getElementById('category-form');
@@ -12,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let categoryToDelete = null;
     
-    // Event Listeners
     showAddFormBtn.addEventListener('click', () => {
         document.getElementById('form-title').textContent = 'Adicionar Nova Categoria';
         document.getElementById('category-id').value = '';
@@ -25,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
         formSection.style.display = 'none';
     });
     
-    // Handle edit buttons
     categoriesList.addEventListener('click', (e) => {
         if (e.target.classList.contains('edit-category')) {
             const categoryCard = e.target.closest('.category-card');
@@ -47,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Form submission
     categoryForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const categoryId = document.getElementById('category-id').value;
@@ -55,12 +50,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const categoryDesc = document.getElementById('category-description').value;
         
         if (categoryId) {
-            // Edit existing category
             const categoryCard = document.querySelector(`.category-card[data-id="${categoryId}"]`);
             categoryCard.querySelector('.category-name').textContent = categoryName;
             categoryCard.querySelector('.category-description').textContent = categoryDesc;
         } else {
-            // Add new category
             const template = document.getElementById('category-template');
             const newCard = document.importNode(template.content, true).querySelector('.category-card');
             
@@ -76,13 +69,11 @@ document.addEventListener('DOMContentLoaded', function() {
         formSection.style.display = 'none';
     });
     
-    // Delete confirmation
     confirmDeleteBtn.addEventListener('click', () => {
         if (categoryToDelete) {
             categoryToDelete.remove();
             deleteModal.style.display = 'none';
             
-            // Show "no categories" message if needed
             if (document.querySelectorAll('.category-card').length === 0) {
                 document.getElementById('no-categories').style.display = 'block';
             }
@@ -93,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
         deleteModal.style.display = 'none';
     });
     
-    // Close modal when clicking outside
     window.addEventListener('click', (e) => {
         if (e.target === deleteModal) {
             deleteModal.style.display = 'none';

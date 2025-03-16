@@ -1,4 +1,3 @@
-// Função para ordenar os produtos
 function ordenarProdutos() {
     const criterio = document.getElementById("sort").value;
     const container = document.getElementById("produtos-container");
@@ -9,15 +8,13 @@ function ordenarProdutos() {
     } else if (criterio === "maiorPreco") {
         produtos.sort((a, b) => parseFloat(b.dataset.preco) - parseFloat(a.dataset.preco));
     } else {
-        // Ordenação padrão (ordem original do HTML)
         produtos.sort((a, b) => {
             const aIndex = Array.from(container.children).indexOf(a);
             const bIndex = Array.from(container.children).indexOf(b);
             return aIndex - bIndex;
         });
     }
-    
-    // Limpar o container e adicionar os itens ordenados
+
     container.innerHTML = '';
     produtos.forEach(produto => container.appendChild(produto));
 }
@@ -46,7 +43,6 @@ function adicionarFavorito(elemento) {
     localStorage.setItem('favoritos', JSON.stringify(favoritos));
 }  
 
-// Função para adicionar ao carrinho
 function adicionarAoCarrinho(elemento) {
     const produtoItem = elemento.closest('.consulta-item');
     const nome = produtoItem.querySelector('h3').innerText;
@@ -60,7 +56,6 @@ function adicionarAoCarrinho(elemento) {
     mostrarPopup("Produto adicionado ao carrinho!");
 }
 
-// Função para mostrar popup
 function mostrarPopup(mensagem) {
     let popup = document.createElement("div");
     popup.className = "popup-alert";
@@ -74,7 +69,6 @@ function mostrarPopup(mensagem) {
     }, 3000);
 }
 
-// Função para verificar o estado dos favoritos ao carregar a página
 window.addEventListener('DOMContentLoaded', () => {
     const favoritosIcons = document.querySelectorAll('.fav-icon');
     const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
@@ -84,7 +78,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const nome = produtoItem.querySelector('h3').innerText;
         
         if (favoritos.some(item => item.nome === nome)) {
-            icon.src = "imagens/fav-filled.webp"; // Mude para uma imagem preenchida
+            icon.src = "imagens/fav-filled.webp";
         }
     });
 });
