@@ -1300,3 +1300,21 @@ select:focus {
     outline: none;
 }
 }
+
+.favCartProfile a img {
+    transition: transform 0.2s ease-in-out;
+}
+
+.favCartProfile a:hover img {
+    transform: translateY(-5px);
+}
+
+.favCartProfile a img,
+.actions img {
+    transition: transform 0.2s ease-in-out;
+}
+
+.favCartProfile a:hover img,
+.actions img:hover {
+    transform: translateY(-5px);
+}
