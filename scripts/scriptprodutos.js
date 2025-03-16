@@ -22,29 +22,29 @@ function ordenarProdutos() {
     produtos.forEach(produto => container.appendChild(produto));
 }
 
-// Função para adicionar aos favoritos
 function adicionarFavorito(elemento) {
     const produtoItem = elemento.closest('.consulta-item');
     const nome = produtoItem.querySelector('h3').innerText;
     const imagem = produtoItem.querySelector('img').src;
     const preco = produtoItem.querySelector('.btn-servico').innerText;
-    
+
     let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+
     const index = favoritos.findIndex(item => item.nome === nome);
-    
+
     if (index === -1) {
         favoritos.push({ nome, imagem, preco });
-        // Mudar para uma imagem de favorito preenchida
-        elemento.src = "imagens/fav-filled.webp";
+        elemento.classList.remove('fa-regular');
+        elemento.classList.add('fa-solid');
     } else {
         favoritos.splice(index, 1);
-        // Voltar para a imagem de favorito normal
-        elemento.src = "imagens/fav.webp";
+        elemento.classList.remove('fa-solid');
+        elemento.classList.add('fa-regular');
     }
     
-    localStorage.setItem('favoritos', JSON.stringify(favoritos));
     mostrarPopup("Adicionado aos favoritos!");
-}
+    localStorage.setItem('favoritos', JSON.stringify(favoritos));
+}  
 
 // Função para adicionar ao carrinho
 function adicionarAoCarrinho(elemento) {
@@ -88,3 +88,4 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
