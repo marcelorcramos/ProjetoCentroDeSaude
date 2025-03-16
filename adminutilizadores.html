@@ -30,7 +30,21 @@
             <h1>Gestão de Utilizadores</h1>
             
             <div class="search-container">
-                <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar utilizador por nome ou e-mail...">
+                <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar utilizador...">
+                
+                <div class="filter-container">
+                    <select id="searchType" class="filter-select">
+                        <option value="all">Todos os campos</option>
+                        <option value="name">Nome</option>
+                        <option value="email">E-mail</option>
+                    </select>
+                    
+                    <select id="statusFilter" class="filter-select">
+                        <option value="all">Todos os status</option>
+                        <option value="ativo">Ativos</option>
+                        <option value="inativo">Inativos</option>
+                    </select>
+                </div>
             </div>
             
             <table class="users-table" id="usersTable">
@@ -40,6 +54,7 @@
                         <th>E-mail</th>
                         <th>Data de Registo</th>
                         <th>Status</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody id="usersTableBody">
@@ -50,7 +65,28 @@
                 Nenhum utilizador encontrado.
             </div>
         </div>
-    </div>
+        
+        <div id="confirmModal" class="modal">
+            <div class="modal-content">
+                <h3 class="modal-title" id="confirmTitle">Confirmar ação</h3>
+                <p id="confirmMessage">Tem certeza que deseja realizar esta ação?</p>
+                <div class="modal-buttons">
+                    <button id="cancelButton" class="btn btn-cancel">Cancelar</button>
+                    <button id="confirmButton" class="btn btn-confirm">Confirmar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="detailsModal" class="modal">
+            <div class="modal-content details-modal-content">
+                <h3 class="modal-title">Detalhes do Utilizador</h3>
+                <div id="userDetailsContent" class="user-details">
+                </div>
+                <div class="modal-buttons">
+                    <button id="closeDetailsButton" class="btn btn-cancel">Fechar</button>
+                </div>
+            </div>
+        </div>
     <script src="scripts/scriptadminutilizadores.js"></script>
 </body>
 </html>
