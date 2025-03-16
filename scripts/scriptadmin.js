@@ -1,16 +1,16 @@
 function saveProduct(event) {
     event.preventDefault();
-
+    
     const title = document.getElementById('title').value;
     const content = document.getElementById('content').value;
     const price = document.getElementById('price').value;
     const images = document.getElementById('images').files;
-
+    
     if (!title || !content || !price) {
         alert('Preencha todos os campos obrigatórios!');
         return;
     }
-
+    
     const product = {
         id: new Date().getTime(),
         title: title,
@@ -18,38 +18,55 @@ function saveProduct(event) {
         price: parseFloat(price).toFixed(2),
         images: []
     };
-
+    
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+    
     if (images.length > 0) {
+        let loadedImages = 0;
+        
         for (let i = 0; i < images.length; i++) {
             const reader = new FileReader();
+            
             reader.onload = function (e) {
                 product.images.push(e.target.result);
+                loadedImages++;
+                
+                if (loadedImages === images.length) {
+                    finalizeSave(product, products);
+                }
             };
+            
             reader.readAsDataURL(images[i]);
         }
+    } else {
+        finalizeSave(product, products);
     }
+}
 
-    let products = JSON.parse(localStorage.getItem('products')) || [];
-
+function finalizeSave(product, products) {
     products.push(product);
-
+    
     localStorage.setItem('products', JSON.stringify(products));
-
+    
     document.getElementById('title').value = '';
     document.getElementById('content').value = '';
     document.getElementById('price').value = '';
     document.getElementById('images').value = '';
-
+    
     alert('Produto salvo com sucesso!');
+    
+    if (window.location.pathname.includes('adminlista.html')) {
+        loadProducts();
+    } else {
+    }
 }
 
 function loadProducts() {
     const productList = document.getElementById('product-list');
-
     const products = JSON.parse(localStorage.getItem('products')) || [];
-
+    
     productList.innerHTML = '';
-
+    
     products.forEach(product => {
         const productItem = document.createElement('div');
         productItem.className = 'product-item';
@@ -70,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (saveButton) {
         saveButton.addEventListener('click', saveProduct);
     }
-
+    
     if (window.location.pathname.includes('adminlista.html')) {
         loadProducts();
     }

@@ -26,11 +26,31 @@
                 <a href="home.html"><button class="home">Voltar para Home</button></a>
             </ul>
         </div>
-        <div class="content">
-            <h1>Lista de Produtos</h1>
-            <div id="product-list"></div>
+        <div class="admin-container">
+            <h1>Gestão de Utilizadores</h1>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar utilizador por nome ou e-mail...">
+            </div>
+            
+            <table class="users-table" id="usersTable">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Data de Registo</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                </tbody>
+            </table>
+            
+            <div id="noResults" class="no-results">
+                Nenhum utilizador encontrado.
+            </div>
         </div>
     </div>
-    <script src="scripts/scriptadminlista.js"></script>
+    <script src="scripts/scriptadminutilizadores.js"></script>
 </body>
 </html>
